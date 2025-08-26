@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.core.validators import MaxLengthValidator, MinLengthValidator
 from django.db import models
 from django.shortcuts import get_object_or_404
@@ -42,6 +43,7 @@ class Women(models.Model):
     tags = models.ManyToManyField('TagPost',blank=True, related_name='tags', verbose_name='Теги')
     husband = models.OneToOneField('Husband', on_delete=models.SET_NULL, null=True,
                                    blank=True, related_name='wuman', verbose_name='Муж')
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='posts', null=True, default=None)
 
     objects = models.Manager()
     published = PublishedManager()
@@ -52,9 +54,9 @@ class Women(models.Model):
     class Meta:
         verbose_name = 'Women'
         verbose_name_plural = 'Womenshy'
-        ordering = ['-time_create']
+        ordering = ['id']
         indexes = [
-            models.Index(fields=['-time_create']),
+            models.Index(fields=['id']),
         ]
 
     def get_absolute_url(self):

@@ -44,3 +44,7 @@ class AddPostForm(forms.ModelForm):
 
 class UploadFileForm(forms.Form):
     file = forms.FileField(label='Upload file')
+
+    class Meta:
+        model = Women
+        fields = ['file']

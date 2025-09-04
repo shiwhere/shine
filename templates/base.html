@@ -23,7 +23,7 @@
 {% endfor %}
 {% if user.is_authenticated %}
     <li class="last">
-	<a href="#">{{ user.username }}</a> |
+	<a href="{% url 'users:profile' %}">{{ user.username }}</a> |
 	<a href="{% url 'users:logout' %}"
        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Выйти</a>
 	<form id="logout-form" method="POST" style="display: none;" action="{% url 'users:logout' %}">
